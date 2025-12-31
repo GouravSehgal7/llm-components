@@ -1,0 +1,221 @@
+A. Fusion by WHEN (Architecture-level)
+1️⃣ Early Fusion
+
+What
+Combine modalities before encoding.
+
+Example
+
+[IMG TOKENS][TEXT TOKENS] → Transformer
+
+
+Application
+
+Small multimodal models
+
+Sensor fusion in robotics
+
+Pros: Simple
+Cons: Poor modality separation
+
+2️⃣ Intermediate Fusion
+
+What
+Modalities interact inside hidden layers.
+
+Example
+
+Text self-attn
+↓
+Cross-attn(Image)
+↓
+FFN
+
+
+Application
+
+GPT-4V
+
+Gemini
+
+LLaVA
+
+Pros: Best reasoning
+Cons: Expensive
+
+3️⃣ Late Fusion
+
+What
+Fuse only final representations.
+
+Example
+
+Text Encoder → Et
+Image Encoder → Ei
+Classifier(Et, Ei)
+
+
+Application
+
+Multimodal classifiers
+
+Recommendation systems
+
+Pros: Modular
+Cons: Weak interaction
+
+🧩 B. Fusion by HOW (Operation-level)
+4️⃣ Concatenation
+
+What
+Join embeddings.
+
+Example
+
+E = [E1 ; E2]
+
+
+Application
+
+Metadata + text
+
+Tabular + NLP
+
+5️⃣ Element-wise Sum
+
+What
+Add embeddings.
+
+Example
+
+E = E1 + E2
+
+
+Application
+
+Token + positional embeddings
+
+Residual connections
+
+6️⃣ Element-wise Product
+
+What
+Multiply features.
+
+Example
+
+E = E1 ⊙ E2
+
+
+Application
+
+Feature gating
+
+Attention modulation
+
+7️⃣ Linear Projection + Sum
+
+What
+Project then add.
+
+Example
+
+E = W1E1 + W2E2
+
+
+Application
+
+Vision-Language models
+
+Domain adaptation
+
+8️⃣ Gated Fusion
+
+What
+Learn how much to trust each modality.
+
+Example
+
+g = σ(W[E1;E2])
+E = gE1 + (1-g)E2
+
+
+Application
+
+Audio-visual speech recognition
+
+Noisy sensor fusion
+
+9️⃣ Attention / Cross-Attention
+
+What
+One modality queries another.
+
+Example
+
+Text → queries
+Image → keys, values
+
+
+Application
+
+Visual QA
+
+Image captioning
+
+GPT-4V
+
+🎯 C. Fusion by TRAINING OBJECTIVE
+🔟 Contrastive Fusion
+
+What
+Align embeddings via similarity loss.
+does not required fused embeddings
+
+Example
+
+(Image, Caption) → CLIP loss
+
+
+Application
+
+Image search
+
+Zero-shot classification
+
+1️⃣1️⃣ Generative Fusion
+
+What
+Fuse to generate output.
+required fused embeddings
+
+Example
+
+(Image + Prompt) → Caption
+
+
+Application
+
+TTS
+
+Image captioning
+
+Chatbots
+
+1️⃣2️⃣ Hybrid Fusion
+
+What
+Contrastive + generative training.
+
+Example
+
+CLIP pretrain → LLM fine-tune
+
+
+Application
+
+LLaVA
+
+Gemini
+
+GPT-4V
